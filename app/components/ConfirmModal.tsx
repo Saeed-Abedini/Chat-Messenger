@@ -3,7 +3,7 @@
 import axios from "axios";
 import useConversation from "hooks/useConversation";
 import { useRouter } from "next/navigation";
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useState } from "react";
 import toast from "react-hot-toast";
 import Modal from "./Modal";
 import { FiAlertTriangle } from "react-icons/fi";
@@ -42,24 +42,24 @@ const ConfirmModal = ({ onClose, isOpen }: ConfirmModalProps) => {
         <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
           <Dialog.Title
             as="h3"
-            className="text-base font-semibold leading-6 text-gray-900"
+            className="text-base font-semibold leading-6 text-gray-900 dark:text-gray-50"
           >
             Delete conversation
           </Dialog.Title>
           <div className="mt-2">
-            <p className="text-sm text-gray-500">
+            <p className="text-sm text-gray-500 dark:text-gray-300">
               Are you sure you want to delete this conversation? This action
               cannot be undone.
             </p>
           </div>
         </div>
       </div>
-      <div className="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse ">
-        <Button disabled={isLoading} danger onClick={onDelete}>
-          Delete
-        </Button>
+      <div className="mt-5 flex items-center justify-end sm:mt-4">
         <Button disabled={isLoading} secondary onClick={onClose}>
           Cancel
+        </Button>
+        <Button disabled={isLoading} danger onClick={onDelete}>
+          Delete
         </Button>
       </div>
     </Modal>

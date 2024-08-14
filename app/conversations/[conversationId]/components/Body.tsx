@@ -7,16 +7,20 @@ import MessageBox from "./MessageBox";
 import axios from "axios";
 import { pusherClient } from "@libs/pusher";
 import { find } from "lodash";
+import { Conversation, User } from "@prisma/client";
 interface BodyProps {
   initialMessages: FullMessageType[];
+  conversation: Conversation & {
+    users: User[];
+  };
 }
 
-const Body = ({ initialMessages }: BodyProps) => {
+const Body = ({ initialMessages, conversation }: BodyProps) => {
   const [messages, setMessages] = useState(initialMessages);
   const bottomRef = useRef<HTMLDivElement>(null);
 
   const { conversationId } = useConversation();
-
+  const isGroup = conversation.isGroup;
   useEffect(() => {
     axios.post(`/api/conversations/${conversationId}/seen`);
   }, [conversationId]);
@@ -60,7 +64,7 @@ const Body = ({ initialMessages }: BodyProps) => {
   }, [conversationId]);
 
   return (
-    <div className="flex-1 overflow-y-auto">
+    <div className="flex-1 overflow-y-auto dark:bg-darkBg">
       {messages.map((message, index) => {
         const previousSenderId =
           index > 0 ? messages[index - 1].sender.id : null;
@@ -70,6 +74,7 @@ const Body = ({ initialMessages }: BodyProps) => {
             data={message}
             isLast={index === messages.length - 1}
             previousSenderId={previousSenderId!}
+            isGroup={isGroup!}
           />
         );
       })}

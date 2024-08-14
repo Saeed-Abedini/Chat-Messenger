@@ -8,7 +8,6 @@ export default async function UserLayout({
   children: React.ReactNode;
 }) {
   const users = await getUsers();
-  console.log(users);
 
   return (
     <div className="h-full">

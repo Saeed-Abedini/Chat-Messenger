@@ -31,14 +31,16 @@ const UserBox = ({ data }: UserBoxProps) => {
       {isLoading && <LoadingModal />}
 
       <div
-        className="w-full relative flex items-center space-x-3 bg-white p-3 hover:bg-neutral-100 rounded-lg transition cursor-pointer"
+        className="w-full relative flex items-center space-x-3 bg-white dark:bg- px-3 py-2 dark:bg-transparent dark:hover:!bg-gray-600 hover:bg-neutral-100 transition cursor-pointer"
         onClick={handleClick}
       >
         <Avatar user={data} />
         <div className="min-w-0 flex-1">
           <div className="focus:outline-none">
             <div className="flex justify-between items-center mb-2">
-              <p className="text-sm font-medium text-gray-900">{data.name}</p>
+              <p className="text-sm font-medium text-gray-900 dark:text-white">
+                {data.name}
+              </p>
             </div>
           </div>
         </div>

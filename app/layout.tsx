@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Vazirmatn } from "next/font/google";
 import "./globals.css";
 import ToasterContext from "context/ToasterContext";
 import AuthContext from "context/AuthContext";
 import ActiveStatus from "components/ActiveStatus";
+import ThemeProvider from "provider/ThemeProvider";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Vazirmatn({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Chat Messenger",
@@ -20,11 +21,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <AuthContext>
-          <ToasterContext />
-          <ActiveStatus />
-          {children}
-        </AuthContext>
+        <ThemeProvider>
+          <AuthContext>
+            <ToasterContext />
+            <ActiveStatus />
+            {children}
+          </AuthContext>
+        </ThemeProvider>
       </body>
     </html>
   );

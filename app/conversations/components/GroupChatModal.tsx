@@ -54,7 +54,7 @@ const GroupChatModal = ({ isOpen, onClose, users }: GroupChatModalProps) => {
         <div className="space-y-12">
           <div className="border-b border-gray-900/10 pb-12">
             <h2 className="text-base font-semibold leading-7 text-gray-900">
-              <p className="mt-1 text-sm leading-6 text-gray-600">
+              <p className="mt-1 text-sm leading-6 text-gray-600 dark:text-gray-200">
                 Create a chat with more than 2 people
               </p>
               <div className="mt-10 flex flex-col gap-y-8">

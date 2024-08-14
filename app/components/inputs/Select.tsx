@@ -11,7 +11,7 @@ interface SelectProps {
 const Select = ({ label, onChange, options, disabled, value }: SelectProps) => {
   return (
     <div className="z-[100]">
-      <label className="block text-sm font-medium leading-6 text-gray-900">
+      <label className="block text-sm font-medium leading-6 text-gray-900 dark:text-gray-200">
         {label}
       </label>
       <div className="mt-2">
@@ -29,7 +29,10 @@ const Select = ({ label, onChange, options, disabled, value }: SelectProps) => {
             }),
           }}
           classNames={{
-            control: () => "text-sm",
+            control: () =>
+              "text-sm dark:bg-slate-700 dark:border-slate-800 dark:focus:ring-sky-800",
+            menu: () => "dark:bg-slate-700 dark:text-gray-200 ",
+            option: () => "dark:hover:bg-slate-800 dark:bg-slate-700",
           }}
         />
       </div>

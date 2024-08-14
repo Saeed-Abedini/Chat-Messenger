@@ -38,7 +38,7 @@ const Header = ({ conversation }: HeaderProps) => {
         isOpen={drawerOpen}
         onClose={() => setDrawerOpen(false)}
       />
-      <div className="bg-white w-full flex border-b-[1px] sm:px-4 py-3 px-4 lg:px-6 justify-between items-center shadow-sm">
+      <div className="bg-white dark:bg-darkSideBar w-full flex border-b-[1px] dark:border-b-slate-950 sm:px-4 py-1 px-4 lg:px-6 justify-between items-center shadow-sm">
         <div className="flex gap-3 items-center">
           <Link
             className="lg:hidden block text-sky-500 hover:text-sky-600 transition cursor-pointer"
@@ -51,9 +51,9 @@ const Header = ({ conversation }: HeaderProps) => {
           ) : (
             <Avatar user={otherUser} />
           )}
-          <div className="flex flex-col">
+          <div className="flex flex-col dark:text-gray-50">
             <div>{conversation.name || otherUser.name}</div>
-            <div className="text-sm font-light text-neutral-500">
+            <div className="text-sm font-light text-neutral-500 dark:text-neutral-200">
               {statusText}
             </div>
           </div>

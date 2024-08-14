@@ -87,18 +87,20 @@ const ConversationList = ({ initialItems, users }: ConversationListProps) => {
       />
       <aside
         className={clsx(
-          `fixed inset-y-0 pb-20 lg:pb-20 lg:left-20 lg:w-80 lg:block overflow-y-auto border-r border-gray-200`,
+          `fixed inset-y-0 pb-5 lg:pb-20 lg:left-20 lg:w-80 lg:block overflow-y-auto border-r  border-gray-200 dark:border-black dark:bg-darkSideBar`,
           isOpen ? "hidden" : "block w-full left-0"
         )}
       >
-        <div className="px-5">
-          <div className="flex justify-between mb-4 pt-4">
-            <div className="text-2xl font-bold text-neutral-800">Messages</div>
+        <div>
+          <div className="flex justify-between py-2 border-b border-b-gray-300 dark:border-b-gray-600">
+            <div className="text-xl ml-4 font-bold text-neutral-800 dark:text-neutral-100 ">
+              Messages
+            </div>
             <div
               onClick={() => setIsModalOpen(true)}
-              className="rounded-full p-2 bg-gray-100 text-gray-600 cursor-pointer hover:opacity-75 transition"
+              className="rounded-full p-1.5 mr-4 bg-gray-100 dark:bg-darkBg text-gray-600 cursor-pointer hover:opacity-75 transition"
             >
-              <MdOutlineGroupAdd size={20} />
+              <MdOutlineGroupAdd size={18} className="dark:text-gray-100" />
             </div>
           </div>
           {items.map((item) => (

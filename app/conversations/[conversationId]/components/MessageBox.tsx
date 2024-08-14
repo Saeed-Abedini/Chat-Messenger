@@ -13,9 +13,15 @@ interface MessageBoxProps {
   data: FullMessageType;
   isLast?: boolean;
   previousSenderId: string;
+  isGroup?: boolean;
 }
 
-const MessageBox = ({ data, isLast, previousSenderId }: MessageBoxProps) => {
+const MessageBox = ({
+  data,
+  isLast,
+  previousSenderId,
+  isGroup,
+}: MessageBoxProps) => {
   const session = useSession();
   const [imageModalOpen, setImageModalOpen] = useState(false);
   const isOwn = session?.data?.user?.email === data?.sender?.email;
@@ -25,33 +31,35 @@ const MessageBox = ({ data, isLast, previousSenderId }: MessageBoxProps) => {
     .join(", ");
   const isFirstMessageFromSender = data.sender.id !== previousSenderId;
 
-  const container = clsx("flex gap-3 py-1 px-1", isOwn && "justify-end");
+  const container = clsx("flex gap-1 py-[0.3px] px-1", isOwn && "justify-end");
 
   const avatar = clsx(isOwn && "order-2");
 
   const body = clsx(
-    `flex flex-col ${!isFirstMessageFromSender && "px-10"}`,
+    `flex flex-col ${!isFirstMessageFromSender && isGroup && "px-9"}`,
     isOwn && "items-end"
   );
 
   const message = clsx(
     "text-sm w-fit overflow-hidden ",
-    isOwn ? "bg-sky-500 text-white" : "bg-gray-100",
-    data.image ? "rounded=md p-0" : "rounded-full py-2 px-3"
+    isOwn
+      ? "bg-sky-500 dark:bg-firstChatBox text-white"
+      : "bg-gray-100 dark:bg-secondChatBox dark:text-white",
+    data.image ? "rounded-md " : "rounded-2xl py-1 px-3"
   );
 
   return (
     <div className={container}>
       <div className={avatar}>
-        {isFirstMessageFromSender && (
+        {isGroup && isFirstMessageFromSender && (
           <div className={avatar}>
-            <Avatar user={data.sender} />
+            <Avatar user={data.sender} messageBox={true} />
           </div>
         )}
       </div>
       <div className={body}>
-        <div className="text-sm text-gray-500 px-2">
-          {isFirstMessageFromSender && data.sender.name}
+        <div className="text-xs text-gray-500 dark:text-gray-100 px-2 pb-0.5">
+          {isGroup && isFirstMessageFromSender && data.sender.name}
         </div>
         <div className={message}>
           <ImageModal
@@ -73,7 +81,7 @@ const MessageBox = ({ data, isLast, previousSenderId }: MessageBoxProps) => {
               <div>{data.body}</div>
               <div
                 className={`text-[10px] pt-1 ${
-                  isOwn ? "text-gray-100" : "text-gray-900"
+                  isOwn ? "text-gray-100" : "text-gray-900 dark:text-gray-100"
                 }`}
               >
                 {format(new Date(data.createdAt), "p")}
@@ -82,7 +90,7 @@ const MessageBox = ({ data, isLast, previousSenderId }: MessageBoxProps) => {
           )}
         </div>
         {isLast && isOwn && seenList.length > 0 && (
-          <div className="text-xs font-light text-gray-500 pr-2 pt-0.5">{`Seen by ${seenList}`}</div>
+          <div className="text-xs font-light text-gray-500 dark:text-gray-200 pr-2 pt-0.5">{`Seen by ${seenList}`}</div>
         )}
       </div>
     </div>

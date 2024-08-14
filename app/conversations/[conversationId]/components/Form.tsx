@@ -41,9 +41,10 @@ const Form = () => {
   };
 
   return (
-    <div className="py-4 px-4 bg-white border-t flex items-center gap-2 lg:gap-4 w-full">
+    <div className="py-2 px-4 bg-white dark:bg-darkSideBar border-t dark:border-t-slate-950 flex items-center gap-2 lg:gap-4 w-full">
       <CldUploadButton
         options={{ maxFiles: 1 }}
+        className="dark:bg-darkBg"
         onUpload={handleUpload}
         uploadPreset="hq95bnha"
       >

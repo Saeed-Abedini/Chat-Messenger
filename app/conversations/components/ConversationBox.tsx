@@ -9,6 +9,7 @@ import { useCallback, useMemo } from "react";
 import { FullConversationType } from "types";
 import { format } from "date-fns";
 import AvatarGroup from "components/AvatarGroup";
+import { MdGroups } from "react-icons/md";
 
 interface ConversationBoxProps {
   data: FullConversationType;
@@ -62,8 +63,10 @@ const ConversationBox = ({ data, selected }: ConversationBoxProps) => {
     <div
       onClick={handleClick}
       className={clsx(
-        `w-full relative flex items-center space-x-3 hover:bg-neutral-100 rounded-lg transition cursor-pointer p-3`,
-        selected ? "bg-neutral-100" : "bg-white"
+        `w-full relative flex items-center transition cursor-pointer px-3 py-2 `,
+        selected
+          ? "bg-neutral-100 dark:bg-selectedChat"
+          : "bg-white dark:bg-transparent hover:!bg-neutral-100 dark:hover:!bg-gray-600"
       )}
     >
       {data.isGroup ? (
@@ -74,24 +77,33 @@ const ConversationBox = ({ data, selected }: ConversationBoxProps) => {
 
       <div className="min-w-0 flex-1">
         <div className="focus:outline-none">
-          <div className="flex justify-between items-center mb-1">
-            <p className="text-md font-medium text-gray-900">
+          <div className="flex justify-between items-center mb-1 ml-2">
+            <p className=" flex gap-1 items-center text-sm font-medium text-gray-900 dark:text-white">
+              {data.isGroup && (
+                <span>
+                  <MdGroups size={20} />
+                </span>
+              )}
               {data.name || otherUser.name}
             </p>
             {lastMessage?.createdAt && (
-              <p className="text-xs text-gray-400 font-light">
+              <p className="text-xs text-gray-400 dark:text-gray-100 font-light">
                 {format(new Date(lastMessage.createdAt), "p")}
               </p>
             )}
           </div>
-          <p
-            className={clsx(
-              `truncate text-sm`,
-              hasSeen ? "text-gray-500" : "text-black font-medium"
-            )}
-          >
-            {lastMessageText}
-          </p>
+          <div>
+            <p
+              className={clsx(
+                `truncate text-sm ml-2`,
+                hasSeen
+                  ? "text-gray-500 dark:text-gray-300"
+                  : "text-black dark:text-white font-medium"
+              )}
+            >
+              {lastMessageText}
+            </p>
+          </div>
         </div>
       </div>
     </div>

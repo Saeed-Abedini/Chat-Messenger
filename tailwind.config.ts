@@ -7,8 +7,19 @@ const config: Config = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        transparent: "transparent",
+        current: "currentColor",
+        darkBg: "#0E1621",
+        darkSideBar: "#17212B",
+        firstChatBox: "#2B5278",
+        secondChatBox: "#182533",
+        selectedChat: "#2B5278",
+      },
+    },
   },
   plugins: [require("@tailwindcss/forms")({ strategy: "class" })],
+  darkMode: "class",
 };
 export default config;

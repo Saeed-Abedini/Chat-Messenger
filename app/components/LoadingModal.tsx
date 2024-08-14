@@ -1,8 +1,10 @@
 "use client";
 
 import { Dialog, Transition } from "@headlessui/react";
+import { ImSpinner } from "react-icons/im";
+
 import { Fragment } from "react";
-import { ClipLoader } from "react-spinners";
+
 const LoadingModal = () => {
   return (
     <Transition.Root show as={Fragment}>
@@ -16,12 +18,15 @@ const LoadingModal = () => {
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="fixed inset-0 bg-gray-100 bg-opacity-50 transition-opacity" />
+          <div className="fixed inset-0 bg-gray-100 dark:bg-darkBg bg-opacity-50 dark:bg-opacity-50 transition-opacity" />
         </Transition.Child>
         <div className="fixed inset-0 z-10 overflow-y-auto">
           <div className="flex min-h-full items-center justify-center p-4 text-center">
             <Dialog.Panel>
-              <ClipLoader size={40} color="#0284c7" />
+              <ImSpinner
+                size={40}
+                className="!text-blue-600 dark:!text-blue-100 animate-spin"
+              />
             </Dialog.Panel>
           </div>
         </div>

@@ -24,6 +24,7 @@ const SettingsModal = ({
   isOpen,
 }: SettingsModalProps) => {
   const router = useRouter();
+
   const [isLoading, setIsLoading] = useState(false);
 
   const {
@@ -31,15 +32,18 @@ const SettingsModal = ({
     handleSubmit,
     setValue,
     watch,
+    reset,
     formState: { errors },
   } = useForm<FieldValues>({
     defaultValues: {
       name: currentUser?.name,
       image: currentUser?.image,
+      theme: localStorage.getItem("theme") === "dark",
     },
   });
 
   const image = watch("image");
+  const theme = watch("theme");
 
   const handleUpload = (result: any) => {
     setValue("image", result?.info?.secure_url, {
@@ -47,9 +51,25 @@ const SettingsModal = ({
     });
   };
 
+  const handleClose = () => {
+    reset({
+      name: currentUser?.name,
+      image: currentUser?.image,
+      theme: localStorage.getItem("theme") === "dark",
+    });
+    onClose();
+  };
+
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     setIsLoading(true);
 
+    if (theme) {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    }
     axios
       .post("/api/settings", data)
       .then(() => {
@@ -61,17 +81,17 @@ const SettingsModal = ({
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal isOpen={isOpen} onClose={handleClose}>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="space-y-12">
-          <div className="border-b border-gray-900/10 pb-12">
-            <h2 className="text-base font-semibold leading-7 text-gray-900">
+        <div className="space-y-2">
+          <div className="border-b border-gray-900/10 pb-2">
+            <h2 className="text-base font-semibold text-gray-900 dark:text-white">
               Profile
             </h2>
-            <p className="mt-1 text-sm leading-6 text-gray-600">
+            <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
               Edit your public information
             </p>
-            <div className="mt-10 flex flex-col gap-y-8">
+            <div className="mt-3 flex flex-col gap-y-4">
               <Input
                 disabled={isLoading}
                 label="Name"
@@ -81,10 +101,10 @@ const SettingsModal = ({
                 required
               />
               <div>
-                <label className="block text-sm font-medium leading-6 text-gray-900">
+                <label className="block text-sm font-medium leading-6 text-gray-900 dark:text-white">
                   Photo
                 </label>
-                <div className="mt-2 flex items-center gap-x-3">
+                <div className="mt-2 flex items-center gap-x-2">
                   <Image
                     width="48"
                     height="48"
@@ -98,17 +118,46 @@ const SettingsModal = ({
                     options={{ maxFiles: 1 }}
                     onUpload={handleUpload}
                     uploadPreset="hq95bnha"
+                    className="dark:text-white"
                   >
-                    <Button disabled={isLoading} secondary type="button">
-                      Change
-                    </Button>
+                    <div>
+                      <Button disabled={isLoading} secondary type="button">
+                        Change
+                      </Button>
+                    </div>
                   </CldUploadButton>
+                </div>
+              </div>
+
+              <h2 className="border-t pt-2 text-base font-semibold text-gray-900 dark:text-white">
+                Settings
+              </h2>
+              <div className="flex items-center gap-3">
+                <div className="py-3.5 text-sm font-medium text-gray-900 dark:text-white">
+                  Dark mode :
+                </div>
+                <div>
+                  <input
+                    type="checkbox"
+                    className="peer sr-only opacity-0"
+                    id="toggleTheme"
+                    {...register("theme")}
+                  />
+                  <label
+                    htmlFor="toggleTheme"
+                    className="relative flex h-6 w-11 cursor-pointer items-center rounded-full bg-gray-400 px-0.5 outline-gray-400 transition-colors before:h-5 before:w-5 before:rounded-full before:bg-white before:shadow before:transition-transform before:duration-300 peer-checked:bg-darkBg dark:peer-checked:bg-darkBg peer-checked:before:translate-x-full peer-focus-visible:outline peer-focus-visible:outline-offset-2 peer-focus-visible:outline-gray-400 peer-checked:peer-focus-visible:outline-slate-900 dark:peer-checked:peer-focus-visible:outline-darkBg "
+                  />
                 </div>
               </div>
             </div>
           </div>
           <div className="mt-6 flex items-center justify-end gap-x-6">
-            <Button disabled={isLoading} secondary onClick={onClose}>
+            <Button
+              type="button"
+              disabled={isLoading}
+              secondary
+              onClick={handleClose}
+            >
               Cancel
             </Button>
             <Button disabled={isLoading} type="submit">

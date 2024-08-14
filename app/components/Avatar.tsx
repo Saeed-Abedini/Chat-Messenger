@@ -6,15 +6,20 @@ import Image from "next/image";
 
 interface AvatarProps {
   user: User;
+  messageBox?: boolean;
 }
 
-const Avatar = ({ user }: AvatarProps) => {
+const Avatar = ({ user, messageBox }: AvatarProps) => {
   const { members } = useActiveList();
   const isActive = members.indexOf(user?.email!) !== -1;
 
   return (
     <div className="relative">
-      <div className="relative inline-block rounded-full overflow-hidden h-9 w-9 md:h-10 md:w-10">
+      <div
+        className={`relative inline-block rounded-full overflow-hidden  ${
+          messageBox ? "h-6 w-6 md:h-7 md:w-7" : " h-8 w-8 md:h-10 md:w-10"
+        }`}
+      >
         <Image
           alt="avatar"
           src={user?.image || "/images/placeholder.png"}
