@@ -1,36 +1,26 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Chat Messenger
 
-## Getting Started
+## Features
+* User Interface: Designed an intuitive interface with two main sections:
+  * Contacts: Display registered users; redirect to chat pages for messaging.
+  * Conversations: Show list of message exchanges; navigate to detailed chat pages.
+* Real-Time Messaging: Utilized PusherJS for real-time message updates.
+* Group Chats: Create groups and chat with multiple users.
+* Status Indicators: Show online/offline status of users.
+* Message Features: Read receipts for sent messages.
+* User Profile: Editable profiles with name and photo updates using Cloudinary.
+* Media Sharing: Photo sending capability via Cloudinary.
+* Database: Managed user and message data with MongoDB and Prisma.
+* Theming: Supported light and dark themes, auto-applied based on device settings.
 
-First, run the development server:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## [Live demo](https://chatmessenger-pro.vercel.app/)
+* Use a VPN, otherwise you will not be able to work with the app properly
+* If you have no time to explore every feature of the app use this account <br>
+email: `user@gmail.com` <br>
+password: `User1234@`
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### Dashboard layout
+![2](https://github.com/Saeed-Abedini/Quera-Task-Manager/assets/58294372/31c5e07e-55a1-4cdd-ae47-a1c5e716933e) <br>
+### Task info
+![3](https://github.com/Saeed-Abedini/Quera-Task-Manager/assets/58294372/6eb47aa8-95a5-42c7-98bd-41d29122cbeb)
