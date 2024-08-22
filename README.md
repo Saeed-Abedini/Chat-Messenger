@@ -20,7 +20,4 @@
 email: `user@gmail.com` <br>
 password: `User1234@`
 
-### Dashboard layout
-![2](https://github.com/Saeed-Abedini/Quera-Task-Manager/assets/58294372/31c5e07e-55a1-4cdd-ae47-a1c5e716933e) <br>
-### Task info
-![3](https://github.com/Saeed-Abedini/Quera-Task-Manager/assets/58294372/6eb47aa8-95a5-42c7-98bd-41d29122cbeb)
+![untitle](https://github.com/user-attachments/assets/e777733b-09c9-429e-b186-5201ab5a567e)
