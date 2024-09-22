@@ -37,15 +37,21 @@ const GroupChatModal = ({ isOpen, onClose, users }: GroupChatModalProps) => {
   const members = watch("members");
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    setIsLoading(true);
-    axios
-      .post("/api/conversations", { ...data, isGroup: true })
-      .then(() => {
-        router.refresh();
-        onClose();
-      })
-      .catch(() => toast.error("Something went wrong!"))
-      .finally(() => setIsLoading(false));
+    if (data.name.trim() === "") {
+      toast.error("Please enter valid name");
+    } else if (data.members.length < 2) {
+      toast.error("Please select 2 member or more");
+    } else {
+      setIsLoading(true);
+      axios
+        .post("/api/conversations", { ...data, isGroup: true })
+        .then(() => {
+          router.refresh();
+          onClose();
+        })
+        .catch(() => toast.error("Something went wrong!"))
+        .finally(() => setIsLoading(false));
+    }
   };
 
   return (
